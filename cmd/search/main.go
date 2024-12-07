@@ -20,8 +20,10 @@ func main() {
 	flag.Parse()
 
 	if flag.NArg() < 1 {
-		fmt.Fprintln(os.Stderr, "Error: Query or URLs required")
-		os.Exit(1)
+		fmt.Printf("Usage: %s [options] <query>\n", os.Args[0])
+		fmt.Println("Options:")
+		flag.PrintDefaults()
+		os.Exit(0)
 	}
 
 	// Validate provider flags
