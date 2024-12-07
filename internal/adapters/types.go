@@ -34,3 +34,9 @@ type ExtractResponse struct {
 	FailedResults []FailedResult  `json:"failed_results"`
 	ResponseTime  float64         `json:"response_time"`
 }
+
+// Add base URL configuration
+type Config struct {
+	APIKey  string
+	BaseURL string
+}

@@ -1,0 +1,23 @@
+# IDE
+.vscode/
+.idea/
+
+# Build
+bin/
+search
+
+# Test coverage
+coverage/
+
+# Environment variables
+.env
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work 

@@ -1,4 +1,4 @@
-package main
+package formatter
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"search-cli/adapters"
+	"github.com/regismesquita/search-cli/internal/adapters"
 )
 
 func TestFormatResults(t *testing.T) {
@@ -24,7 +24,7 @@ func TestFormatResults(t *testing.T) {
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
-	formatResults(results)
+	FormatResults(results)
 
 	w.Close()
 	os.Stdout = old
@@ -62,7 +62,7 @@ func TestFormatExtractResults(t *testing.T) {
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
-	formatExtractResults(results)
+	FormatExtractResults(results)
 
 	w.Close()
 	os.Stdout = old

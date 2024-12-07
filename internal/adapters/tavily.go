@@ -10,7 +10,8 @@ import (
 )
 
 type TavilyProvider struct {
-	apiKey string
+	apiKey  string
+	baseURL string
 }
 
 func NewTavilyProvider() (*TavilyProvider, error) {
@@ -18,7 +19,10 @@ func NewTavilyProvider() (*TavilyProvider, error) {
 	if apiKey == "" {
 		return nil, fmt.Errorf("TAVILY_API_KEY environment variable is not set")
 	}
-	return &TavilyProvider{apiKey: apiKey}, nil
+	return &TavilyProvider{
+		apiKey:  apiKey,
+		baseURL: "https://api.tavily.com", // default URL
+	}, nil
 }
 
 func (t *TavilyProvider) Extract(urls []string) (*ExtractResponse, error) {
@@ -35,7 +39,7 @@ func (t *TavilyProvider) Extract(urls []string) (*ExtractResponse, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", "https://api.tavily.com/extract", bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", t.baseURL+"/extract", bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +91,7 @@ func (t *TavilyProvider) Search(query string, options map[string]string) (*Searc
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", "https://api.tavily.com/search", bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", t.baseURL+"/search", bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, err
 	}

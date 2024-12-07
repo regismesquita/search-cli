@@ -7,15 +7,15 @@ import (
 	"os"
 	"strings"
 
-	"search-cli/internal/adapters"
-	"search-cli/internal/formatter"
+	"github.com/regismesquita/search-cli/internal/adapters"
+	"github.com/regismesquita/search-cli/internal/formatter"
 )
 
 func main() {
 	jsonOutput := flag.Bool("json", false, "Output in JSON format")
-	tavilyMode := flag.Bool("tavily", false, "Use Tavily as provider")
-	serperMode := flag.Bool("serper", false, "Use Serper as provider (default)")
-	extractMode := flag.Bool("extract", false, "Extract content from URLs (Tavily only)")
+	tavilyMode := flag.Bool("t", false, "Use Tavily as provider")
+	serperMode := flag.Bool("s", false, "Use Serper as provider (default)")
+	extractMode := flag.Bool("e", false, "Extract content from URLs (Tavily only)")
 	depth := flag.String("depth", "basic", "Search depth (basic or advanced) - only for Tavily")
 	flag.Parse()
 
@@ -26,13 +26,13 @@ func main() {
 
 	// Validate provider flags
 	if *tavilyMode && *serperMode {
-		fmt.Fprintln(os.Stderr, "Error: Cannot use both -tavily and -serper")
+		fmt.Fprintln(os.Stderr, "Error: Cannot use both -t and -s")
 		os.Exit(1)
 	}
 
 	// Validate extract mode
 	if *extractMode && *serperMode {
-		fmt.Fprintln(os.Stderr, "Error: Extract mode is only available with Tavily")
+		fmt.Fprintln(os.Stderr, "Error: Extract mode (-e) is only available with Tavily (-t)")
 		os.Exit(1)
 	}
 

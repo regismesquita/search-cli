@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"search-cli/internal/adapters"
+	"github.com/regismesquita/search-cli/internal/adapters"
 )
 
 func FormatResults(results *adapters.SearchResponse) {

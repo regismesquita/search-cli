@@ -10,7 +10,8 @@ import (
 )
 
 type SerperProvider struct {
-	apiKey string
+	apiKey  string
+	baseURL string
 }
 
 type serperRequest struct {
@@ -29,7 +30,10 @@ func NewSerperProvider() (*SerperProvider, error) {
 	if apiKey == "" {
 		return nil, fmt.Errorf("SERPER_API_KEY environment variable is not set")
 	}
-	return &SerperProvider{apiKey: apiKey}, nil
+	return &SerperProvider{
+		apiKey:  apiKey,
+		baseURL: "https://google.serper.dev/search",
+	}, nil
 }
 
 func (s *SerperProvider) Search(query string, options map[string]string) (*SearchResponse, error) {
@@ -39,7 +43,7 @@ func (s *SerperProvider) Search(query string, options map[string]string) (*Searc
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", "https://google.serper.dev/search", bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", s.baseURL, bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, err
 	}
