@@ -18,8 +18,7 @@ go install github.com/regismesquita/search-cli/cmd/search@latest
 
 ### Using mise (formerly rtx)
 ```bash
-mise use -g go@latest
-mise install github.com/regismesquita/search-cli/cmd/search@latest
+mise use go:github.com/regismesquita/search-cli/cmd/search@latest
 ```
 
 ### From Source
